@@ -9,3 +9,8 @@ h1, h2
 {
     text-align: center;
 }
+
+.btn-primary, p
+{
+    margin-left: 20px;
+}
