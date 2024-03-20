@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title><%= var title; title %></title>
     <meta charset="UTF-8">
-    <title><%= title %></title>
+    <title>Home</title>
 
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
@@ -12,15 +13,13 @@
     <script src="../client/Scripts/router.js"></script>
     <script src="../client/Scripts/contact.js"></script>
     <script src="../client/Scripts/user.js"></script>
-
-
 </head>
-<body>
-<header></header>
-
-<main class="container"><%= title %></main>
-
-<footer></footer>
+<body id="<%= page %>">
+<header><%- include('./components/header') -%></header>
+<main class="container">
+    <%- include('./content/' + page) -%>
+</main>
+<footer><%- include('./components/footer') -%></footer>
 </body>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

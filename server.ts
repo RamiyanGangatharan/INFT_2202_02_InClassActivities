@@ -1,30 +1,67 @@
-"use strict";
+#!/usr/bin/env node
 
-import express from 'express'
-import path from 'path';
+/**
+ * Module dependencies.
+ */
+import debug from 'debug';
+import http from 'http';
+import app from './app';
 
-//variables
-const router = express.Router(); //create new router
-const app = express(); //initialize app object
-const port = process.env.PORT || 3000; //set port
+// Setup debug with a specific namespace, e.g., 'your-app-name:server'
+const debugLog = debug('your-app-name:server');
 
-//config
-app.use(router); // register the router within the app
-app.set("views", path.join(__dirname, "./views")); // set directory for views
-app.set("view engine", "ejs");// set the view engine to EJS
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
-//static config: serving static files, presentation tier (css, js, images)
-app.use(express.static(path.join(__dirname, "./client/"))); // server static files from client directory
-app.use(express.static(path.join(__dirname, "./node_modules/"))); // server static files from node_modules directory
+const server = http.createServer(app);
 
-//middleware
-router.get(`/`, function (req, res, next)
-{
-    res.render(`index`, {title: "hello World!"})
-})
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
+function normalizePort(val: string) {
+  const port = parseInt(val, 10);
 
-app.listen(port, () =>
-{
-    console.log(`server running at http://localhost:${port}/`);
-})
+  if (isNaN(port)) {
+    return val;
+  }
+
+  if (port >= 0) {
+    return port;
+  }
+
+  return false;
+}
+
+function onError(error: { syscall: string; code: any; }) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  const bind = typeof port === 'string'
+      ? 'Pipe ' + port
+      : 'Port ' + port;
+
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
+  debugLog('Listening on ' + bind);
+}
+
+export default server;
