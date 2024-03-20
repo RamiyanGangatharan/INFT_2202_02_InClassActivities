@@ -1,33 +1,30 @@
 "use strict";
 
-import http from 'http'
-import fs from 'fs'
-import mime from 'mime-types'
+import express from 'express'
+import path from 'path';
 
-let lookup = mime.lookup
-const port = process.env.PORT || 3000;
-const server = http.createServer((request, response) =>
+//variables
+const router = express.Router(); //create new router
+const app = express(); //initialize app object
+const port = process.env.PORT || 3000; //set port
+
+//config
+app.use(router); // register the router within the app
+app.set("views", path.join(__dirname, "./views")); // set directory for views
+app.set("view engine", "ejs");// set the view engine to EJS
+
+//static config: serving static files, presentation tier (css, js, images)
+app.use(express.static(path.join(__dirname, "./client/"))); // server static files from client directory
+app.use(express.static(path.join(__dirname, "./node_modules/"))); // server static files from node_modules directory
+
+//middleware
+router.get(`/`, function (req, res, next)
 {
-    let path = request.url as string;
-    if (path === "/" || path === "/home") { path = "/index.html"; }
+    res.render(`index`, {title: "hello World!"})
+})
 
-    let mime_type = lookup(path.substring(1));
-    fs.readFile(__dirname + path, function (err, data)
-    {
-      if(err)
-      {
-          response.writeHead(404);
-          response.end("error 404 - File Not Found!" + err.message);
-          return;
-      }
-      if (!mime_type) { mime_type = 'text/plain'; }
 
-      // set security headers and response within your file.
-      response.setHeader("X-Content-Type-Options", "nosniff")
-      response.writeHead(200,{'Content-Type' : mime_type});
-      response.end(data);
-    });
-});
-
-server.listen(port, () =>
-{console.log(`Server running at http://localhost:${port}/`);})
+app.listen(port, () =>
+{
+    console.log(`server running at http://localhost:${port}/`);
+})
