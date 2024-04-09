@@ -1,0 +1,32 @@
+{
+  "Users":
+  [
+    {
+      "DisplayName": "Bilbo Baggins",
+      "EmailAddress": "Bilbo.Baggins@dcmail.ca",
+      "Username": "bbaggins",
+      "Password": "09765"
+    },
+
+    {
+      "DisplayName": "Gandalf Godfry",
+      "EmailAddress": "GandalftheWizGod@gmail.com",
+      "Username": "gWizard",
+      "Password": "12345"
+    },
+
+    {
+      "DisplayName": "Stephen King",
+      "EmailAddress": "stephen.king@dcmail.ca",
+      "Username": "sking",
+      "Password": "54499"
+    },
+
+    {
+      "DisplayName": "Admin",
+      "EmailAddress": "Admin@dcmail.ca",
+      "Username": "admin",
+      "Password": "55555"
+    }
+  ]
+}
