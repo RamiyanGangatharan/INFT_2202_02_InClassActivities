@@ -1,0 +1,28 @@
+{
+  "Contacts":
+  [
+    {
+      "DisplayName": "Bilbo Baggins",
+      "ContactNumber" : "995-152-2399",
+      "EmailAddress": "Bilbo.Baggins@dcmail.ca"
+    },
+
+    {
+      "DisplayName": "Gandalf Godfry",
+      "ContactNumber": "742-384-4400",
+      "EmailAddress": "GandalftheWizGod@gmail.com"
+    },
+
+    {
+      "DisplayName": "Stephen King",
+      "ContactNumber": "406-888-7272",
+      "EmailAddress": "stephen.king@dcmail.ca"
+    },
+
+    {
+      "DisplayName": "Admin",
+      "ContactNumber": "416-457-7411",
+      "EmailAddress": "Admin@dcmail.ca"
+    }
+  ]
+}
