@@ -3,7 +3,6 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 import passportLocalMongoose from "passport-local-mongoose";
-import User = core.User;
 
 const UserSchema:any = new Schema(
     {
@@ -22,4 +21,14 @@ const UserSchema:any = new Schema(
 
 UserSchema.plugin(passportLocalMongoose);
 const Model = mongoose.model("User", UserSchema);
+
+declare global
+{
+    export type UserDocument = mongoose.Document &
+        {
+            username: String,
+            EmailAddress: String,
+            DisplayName: String
+        }
+}
 export default Model;

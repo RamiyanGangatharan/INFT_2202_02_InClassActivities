@@ -21,9 +21,15 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact"><i class="fa-solid fa-envelope"></i> Contact Us</a>
         </li>
+        <% if(displayName) {%>
         <li id="login" class="nav-item">
           <a class="nav-link" href="/login"><i class="fa fa-sign-in-alt"></i> Login</a>
         </li>
+        <% } else {%>
+          <li id="logout" class="nav-item">
+            <a class="nav-link" href="/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
+          </li>
+        <% } %>
       </ul>
     </div>
   </div>

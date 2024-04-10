@@ -1,17 +1,5 @@
 "use strict";
 (function () {
-    function CheckLogin() {
-        if (sessionStorage.getItem("user")) {
-            $("#login").html(`<a id="logout" class="nav-link" href="#">
-                        <i class="fas fa-sign-out-alt"></i> Logout</a>`);
-        }
-        $("#logout").on("click", function () {
-            sessionStorage.clear();
-            $("#login").html(`<a class="nav-link" data="login">
-                        <i class="fas fa-sign-in-alt"></i> Login</a>`);
-            location.href = "/login";
-        });
-    }
     function ContactFormValidation() {
         ValidateField("#fullName", /^([A-Z][a-z]{1,3}\.?\s)?([A-Z][a-z]+)+([\s,-]([A-z][a-z]+))*$/, "Please enter a valid first and lastname.");
         ValidateField("#contactNumber", /^(\+\d{1,3}[\s-.])?\(?\d{3}\)?[\s-.]?\d{3}[\s-.]\d{4}$/, "Please enter a valid phone contact number.");
@@ -132,7 +120,6 @@
     function Start() {
         console.log("App Started");
         let page_id = $("body")[0].getAttribute("id");
-        CheckLogin();
         switch (page_id) {
             case "home":
                 DisplayHomePage();
